@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  This file is part of My Expenses.
+  My Expenses is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  My Expenses is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with My Expenses.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+  <group android:id="@+id/MenuBulkGroup">
+	  <item
+	    android:id="@+id/BulkGroupCommand"
+	    android:icon="@drawable/ic_action_bg"
+	    android:showAsAction="always"
+	    android:title="Bulk Action for Group">
+	  </item>
+  </group>
+  <group android:id="@+id/MenuBulkChild">
+    <item
+      android:id="@+id/BulkChildCommand"
+      android:icon="@drawable/ic_action_bc"
+      android:showAsAction="always"
+      android:title="Bulk Action for Child">
+    </item>
+  </group>
+  <group android:id="@+id/MenuSingleGroup">
+    <item
+      android:id="@+id/SingleGroupCommand"
+      android:icon="@drawable/ic_action_sg"
+      android:showAsAction="always"
+      android:title="Single Action for Group">
+    </item>
+  </group>
+  <group android:id="@+id/MenuSingleChild">
+	  <item
+	    android:id="@+id/SingleChildCommand"
+	    android:icon="@drawable/ic_action_sc"
+	    android:showAsAction="always"
+	    android:title="Single Action for Child">
+	  </item>
+  </group>
+</menu>

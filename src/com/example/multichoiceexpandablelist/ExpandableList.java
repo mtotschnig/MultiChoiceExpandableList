@@ -16,6 +16,8 @@
 
 package com.example.multichoiceexpandablelist;
 
+import java.util.ArrayList;
+
 import android.app.ExpandableListActivity;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
@@ -96,7 +98,8 @@ public class ExpandableList extends ExpandableListActivity implements OnGroupCli
             int itemId = item.getItemId();
             SparseBooleanArray checkedItemPositions = lv.getCheckedItemPositions();
             int checkedItemCount = checkedItemPositions.size();
-            String msgAction="", msgObject="";
+            String msgAction="";
+            ArrayList<String> msgObject = new ArrayList<String>();
             if (checkedItemPositions != null) {
               for (int i=0; i<checkedItemCount; i++) {
                 if (checkedItemPositions.valueAt(i)) {
@@ -105,29 +108,29 @@ public class ExpandableList extends ExpandableListActivity implements OnGroupCli
                   long pos = lv.getExpandableListPosition(position);
                   int groupPos = ExpandableListView.getPackedPositionGroup(pos);
                   if (ExpandableListView.getPackedPositionType(pos) == ExpandableListView.PACKED_POSITION_TYPE_GROUP) {
-                    msgObject = ": Group " + groupPos;
+                    msgObject.add("Group " + groupPos);
                   } else {
                     int childPos = ExpandableListView.getPackedPositionChild(pos);
-                    msgObject = ": Child " + childPos + " in group " + groupPos;
+                    msgObject.add("Child " + childPos + " in group " + groupPos);
                   }
                 }
               }
             }
             switch(itemId) {
             case R.id.BulkChildCommand:
-              msgAction = "Received bulk command on ";
-              break;
             case R.id.BulkGroupCommand:
-              msgAction = "Received bulk command on ";
+              msgAction = "Received bulk command on: ";
               break;
             case R.id.SingleChildCommand:
-              msgAction = "Received single command on ";
-              break;
             case R.id.SingleGroupCommand:
-              msgAction = "Received single command on ";
+              msgAction = "Received single command on: ";
               break;
             }
-            Toast.makeText(getBaseContext(), msgAction + msgObject, Toast.LENGTH_LONG).show();
+            Toast.makeText(
+                getBaseContext(),
+                msgAction + strJoin(msgObject.toArray(new String[msgObject.size()]), ","),
+                Toast.LENGTH_LONG)
+              .show();
             mode.finish();
             return true;
           }
@@ -139,7 +142,16 @@ public class ExpandableList extends ExpandableListActivity implements OnGroupCli
         });
         lv.setOnGroupClickListener(this);
     }
-
+    //http://stackoverflow.com/a/15293227/1199911
+    private String strJoin(String[] aArr, String sSep) {
+      StringBuilder sbStr = new StringBuilder();
+      for (int i = 0, il = aArr.length; i < il; i++) {
+          if (i > 0)
+              sbStr.append(sSep);
+          sbStr.append(aArr[i]);
+      }
+      return sbStr.toString();
+  }
     /**
      * A simple adapter which maintains an ArrayList of photo resource Ids. 
      * Each photo is displayed as an image. This adapter supports clearing the
